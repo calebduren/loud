@@ -15,97 +15,55 @@ const getAccessToken = async (): Promise<string> => {
     body: 'grant_type=client_credentials'
   });
 
-  if (!response.ok) {
-    console.error('Failed to obtain access token:', response.status, response.statusText);
-    const errorBody = await response.text();
-    console.error('Error body:', errorBody);
-    throw new Error(`Failed to obtain access token. Status: ${response.status}`);
-  }
-
   const data = await response.json();
   if (data.access_token) {
     accessToken = data.access_token;
     console.log('New access token obtained');
   } else {
-    console.error('Access token not found in response:', data);
-    throw new Error("Access token not found in response");
+    console.error('Failed to obtain access token:', data);
+    throw new Error("Failed to obtain access token");
   }
   return accessToken ?? ''; // Provide a default empty string if accessToken is null
 };
 
-interface SpotifyImage {
-  url: string;
-  height: number;
-  width: number;
-}
-
-interface SpotifyArtist {
-  name: string;
-}
-
-interface SpotifyAlbum {
-  id: string;
-  name: string;
-  artists: SpotifyArtist[];
-  album_type: string;
-  images: SpotifyImage[];
-  release_date: string;
-}
-
-interface SpotifySearchResponse {
+interface SpotifyNewReleasesResponse {
   albums: {
-    items: SpotifyAlbum[];
+    items: Array<{
+      id: string;
+      name: string;
+      artists: Array<{ name: string }>;
+      album_type: string;
+      images: Array<{ url: string }>;
+      release_date: string;
+    }>;
   };
 }
 
-export const fetchRecentReleases = async (): Promise<SpotifySearchResponse> => {
-  console.log('fetchRecentReleases called');
-  try {
-    const token = await getAccessToken();
-    console.log('Access token obtained:', token.substring(0, 5) + '...');
-
-    const currentDate = new Date();
-    const oneMonthAgo = new Date(currentDate.setMonth(currentDate.getMonth() - 1));
-    const fromDate = oneMonthAgo.toISOString().split('T')[0];
-
-    let allReleases: SpotifyAlbum[] = [];
-
-    // Fetch albums
-    const albumUrl = `https://api.spotify.com/v1/search?q=year:${fromDate}-${currentDate.getFullYear()}&type=album&limit=50`;
-    console.log('Sending request to Spotify API for albums:', albumUrl);
-    const albumResponse = await fetch(albumUrl, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
-
-    if (!albumResponse.ok) {
-      throw new Error(`HTTP error! status: ${albumResponse.status}`);
+export const fetchNewReleases = async (): Promise<SpotifyNewReleasesResponse> => {
+  console.log('fetchNewReleases called');
+  const token = await getAccessToken();
+  
+  // Use the maximum limit allowed by Spotify API to get more releases
+  const url = 'https://api.spotify.com/v1/browse/new-releases?limit=50&country=US';
+  console.log('Sending request to Spotify API:', url);
+  
+  const response = await fetch(url, {
+    headers: {
+      'Authorization': `Bearer ${token}`
     }
+  });
 
-    const albumData: SpotifySearchResponse = await albumResponse.json();
-    allReleases = [...allReleases, ...albumData.albums.items];
-
-    // Fetch singles (using tag:new instead of type=single)
-    const singleUrl = `https://api.spotify.com/v1/search?q=year:${fromDate}-${currentDate.getFullYear()}%20tag:new&type=album&limit=50`;
-    console.log('Sending request to Spotify API for singles:', singleUrl);
-    const singleResponse = await fetch(singleUrl, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
-
-    if (!singleResponse.ok) {
-      throw new Error(`HTTP error! status: ${singleResponse.status}`);
-    }
-
-    const singleData: SpotifySearchResponse = await singleResponse.json();
-    allReleases = [...allReleases, ...singleData.albums.items.filter(item => item.album_type === 'single')];
-
-    // Sort releases by date, most recent first
-    allReleases.sort((a, b) => new Date(b.release_date).getTime() - new Date(a.release_date).getTime());
-
-    console.log(`Fetched ${allReleases.length} recent releases`);
-    
-    return { albums: { items: allReleases } };
-  } catch (error) {
-    console.error('Error in fetchRecentReleases:', error);
-    throw error;
+  if (!response.ok) {
+    console.error('Spotify API request failed:', response.status, response.statusText);
+    const errorBody = await response.text();
+    console.error('Error body:', errorBody);
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
+
+  const data: SpotifyNewReleasesResponse = await response.json();
+  console.log(`Fetched ${data.albums.items.length} new releases`);
+  console.log('First release date:', data.albums.items[0]?.release_date);
+  console.log('Last release date:', data.albums.items[data.albums.items.length - 1]?.release_date);
+  
+  return data;
 };

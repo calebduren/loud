@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Logo from './components/Logo';
 import Callback from './components/Callback';
-import { fetchRecentReleases } from './SpotifyApiUtils';
+import { fetchNewReleases } from './SpotifyApiUtils';
 import './App.css';
-
+import ReleaseCard from './components/ReleaseCard';
 interface Release {
   id: string;
   name: string;
@@ -13,21 +13,6 @@ interface Release {
   image: string;
   releaseDate: string;
 }
-
-const ReleaseCard: React.FC<{ release: Release }> = ({ release }) => (
-  <div className="release-card">
-    <img src={release.image} alt={release.name} className="release-image" />
-    <div className="release-info">
-      <div className="tag-container">
-        <span className="tag tag-type">{release.type}</span>
-      </div>
-      <h3 className="artist-name">{release.artist}</h3>
-      <p className="album-name">{release.name}</p>
-      <p className="release-date">Released: {release.releaseDate}</p>
-      <a href={`https://open.spotify.com/album/${release.id}`} target="_blank" rel="noopener noreferrer" className="spotify-link">Open in Spotify ↗</a>
-    </div>
-  </div>
-);
 
 const Home: React.FC = () => {
   const [releases, setReleases] = useState<Release[]>([]);
@@ -41,7 +26,7 @@ const Home: React.FC = () => {
       try {
         setIsLoading(true);
         setError(null);
-        const data = await fetchRecentReleases();
+        const data = await fetchNewReleases();
         const formattedReleases: Release[] = data.albums.items.map(item => ({
           id: item.id,
           name: item.name,
@@ -76,13 +61,14 @@ const Home: React.FC = () => {
 
   return (
     <div className="container">
-      <header className="mb-8 flex flex-row gap-4 items-center">
+      <header className="mb-8 flex flex-col gap-4 items-center">
         <div className="logo-container m-0">
           <Logo />
         </div>
-        <div className="flex flex-col m-0">
-        <h1 className="text-2xl font-bold m-0">Loud</h1>
-        <p className="subtitle m-0">A better way to view Spotify new releases</p>
+        <div className="flex flex-col gap-1 items-center m-0">
+        <h1 className="text-4xl font-bold m-0">Loud</h1>
+        <p className=" text-gray-700">New music, new releases, new artists.</p>
+        <p className="text-sm text-gray-500">A better way to filter Spotify releases.</p>
         </div>
       </header>
       <div className="filter-section">
