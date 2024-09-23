@@ -7,6 +7,8 @@ import ReleaseCard from './components/ReleaseCard';
 import Header from './components/Header';
 import Filters from './components/Filters';
 import Banner from './components/Banner';
+import Spinner from './components/Spinner';
+
 interface Release {
   id: string;
   name: string;
@@ -29,7 +31,7 @@ const Home: React.FC = () => {
       try {
         setIsLoading(true);
         setError(null);
-        const data = await fetchNewReleases();
+        const data = await fetchNewReleases(100);
         const formattedReleases: Release[] = data.albums.items.map(item => ({
           id: item.id,
           name: item.name,
@@ -60,8 +62,8 @@ const Home: React.FC = () => {
     setFilteredReleases(filtered);
   }, [releases, releaseTypeFilter]);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (isLoading) return <div className='loading'><Spinner animation="border" role="status"><span className="sr-only">Loading...</span></Spinner></div>;
+  if (error) return <div className='error'>Error: {error}</div>;
 
   return (
     <>

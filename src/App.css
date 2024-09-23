@@ -77,6 +77,11 @@ body {
   --primary-color-dark: #e44044;
 }
 
+.loading,
+.error {
+  @apply flex flex-col gap-4 text-center text-gray-500 font-medium w-full h-screen items-center justify-center;
+}
+
 .container {
   max-width: 1000px;
   margin: 0 auto;
