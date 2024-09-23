@@ -62,7 +62,7 @@ const Home: React.FC = () => {
     setFilteredReleases(filtered);
   }, [releases, releaseTypeFilter]);
 
-  if (isLoading) return <div className='loading'><Spinner animation="border" role="status"><span className="sr-only">Loading...</span></Spinner></div>;
+  if (isLoading) return <div className='loading'><Spinner /></div>;
   if (error) return <div className='error'>Error: {error}</div>;
 
   return (
