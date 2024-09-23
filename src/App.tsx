@@ -6,7 +6,7 @@ import './App.css';
 import ReleaseCard from './components/ReleaseCard';
 import Header from './components/Header';
 import Filters from './components/Filters';
-
+import Banner from './components/Banner';
 interface Release {
   id: string;
   name: string;
@@ -63,6 +63,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="container">
+      <Banner />
       <Header />
       <Filters setReleaseTypeFilter={setReleaseTypeFilter} releaseTypeFilter={releaseTypeFilter} />
       <div className="release-grid">
