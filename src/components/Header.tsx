@@ -4,13 +4,13 @@ import React from "react";
 const Header: React.FC = () => {
   return (
 <header className="mb-12 flex flex-col gap-4 items-center">
-    <div className="logo-container m-6">
+    <div className="logo-container">
         <Logo />
     </div>
     <div className="flex flex-col items-center m-0 max-w-full">
-        <h1 className="text-3xl mb-4 font-extrabold m-0">Loud</h1>
-        <p className=" text-gray-700 text-lg text-center">New music, new releases, new artists.</p>
-        <p className="text-base text-gray-500 text-center">Filterable Spotify releases.</p>
+        <h1 className="text-4xl mb-6 font-bold m-0">Loud</h1>
+        <p className=" text-gray-700 text-2xl mb-1 font-medium text-center">Find your next favorite record</p>
+        <p className="text-lg text-gray-500 text-center">Spotify new releases with filters</p>
     </div>
     </header>
   );

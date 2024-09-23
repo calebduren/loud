@@ -8,8 +8,8 @@ interface FiltersProps {
 const Filters: React.FC<FiltersProps> = ({ releaseTypeFilter, setReleaseTypeFilter }) => (
     <div className="filter-section">
         <div className="filter-group ">
-            <label className="filter-label">Filter by release length</label>
-            <div className="filter-button-grou flex flex-row gap-2 flex-wrap">
+            <label className="filter-label text-gray-500 text-sm">Filter by release length</label>
+            <div className="filter-button-group flex flex-row gap-2 flex-wrap">
                 <button 
                     className={`filter-button ${releaseTypeFilter === 'All' ? 'active' : ''}`} 
                     onClick={() => setReleaseTypeFilter('All')}
