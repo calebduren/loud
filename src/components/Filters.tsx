@@ -23,6 +23,12 @@ const Filters: React.FC<FiltersProps> = ({ releaseTypeFilter, setReleaseTypeFilt
                     Album
                 </button>
                 <button 
+                    className={`filter-button ${releaseTypeFilter === 'ep' ? 'active' : ''}`} 
+                    onClick={() => setReleaseTypeFilter('ep')}
+                >
+                    EP
+                </button>
+                <button 
                     className={`filter-button ${releaseTypeFilter === 'single' ? 'active' : ''}`} 
                     onClick={() => setReleaseTypeFilter('single')}
                 >
