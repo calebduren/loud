@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Logo from './components/Logo';
 import Callback from './components/Callback';
 import { fetchNewReleases } from './SpotifyApiUtils';
 import './App.css';
 import ReleaseCard from './components/ReleaseCard';
 import Header from './components/Header';
+import Filters from './components/Filters';
 
 interface Release {
   id: string;
@@ -64,41 +64,10 @@ const Home: React.FC = () => {
   return (
     <div className="container">
       <Header />
-      <div className="filter-section">
-        <div className="filter-group">
-          <label className="filter-label">Filter by release type</label>
-          <div className="filter-button-group">
-            <button 
-              className={`filter-button ${releaseTypeFilter === 'All' ? 'active' : ''}`} 
-              onClick={() => setReleaseTypeFilter('All')}
-            >
-              All
-            </button>
-            <button 
-              className={`filter-button ${releaseTypeFilter === 'album' ? 'active' : ''}`} 
-              onClick={() => setReleaseTypeFilter('album')}
-            >
-              Album
-            </button>
-            <button 
-              className={`filter-button ${releaseTypeFilter === 'single' ? 'active' : ''}`} 
-              onClick={() => setReleaseTypeFilter('single')}
-            >
-              Single
-            </button>
-            <button 
-              className={`filter-button ${releaseTypeFilter === 'compilation' ? 'active' : ''}`} 
-              onClick={() => setReleaseTypeFilter('compilation')}
-            >
-              Compilation
-            </button>
-          </div>
-        </div>
-      </div>
-
+      <Filters setReleaseTypeFilter={setReleaseTypeFilter} releaseTypeFilter={releaseTypeFilter} />
       <div className="release-grid">
         {filteredReleases.length > 0 ? (
-          filteredReleases.map(release => (
+          filteredReleases.sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()).map(release => (
             <ReleaseCard key={release.id} release={release} />
           ))
         ) : (
