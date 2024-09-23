@@ -31,7 +31,7 @@ const Home: React.FC = () => {
       try {
         setIsLoading(true);
         setError(null);
-        const data = await fetchNewReleases(100);
+        const data = await fetchNewReleases();
         const formattedReleases: Release[] = data.albums.items.map(item => ({
           id: item.id,
           name: item.name,
