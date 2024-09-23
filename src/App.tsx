@@ -14,6 +14,7 @@ interface Release {
   type: string;
   image: string;
   releaseDate: string;
+  totalTracks: any;
 }
 
 const Home: React.FC = () => {
@@ -35,7 +36,8 @@ const Home: React.FC = () => {
           artist: item.artists[0].name,
           type: item.album_type,
           image: item.images[0].url,
-          releaseDate: item.release_date
+          releaseDate: item.release_date,
+          totalTracks: item.total_tracks,
         }));
 
         console.log('Formatted releases:', formattedReleases);
@@ -62,20 +64,22 @@ const Home: React.FC = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
+    <>
+    <Banner />
     <div className="container">
-      <Banner />
       <Header />
       <Filters setReleaseTypeFilter={setReleaseTypeFilter} releaseTypeFilter={releaseTypeFilter} />
       <div className="release-grid">
         {filteredReleases.length > 0 ? (
           filteredReleases.sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()).map(release => (
-            <ReleaseCard key={release.id} release={release} />
+            <ReleaseCard key={release.id} release={release}/>
           ))
         ) : (
           <div>No releases found for the selected filter.</div>
         )}
       </div>
     </div>
+    </>
   );
 };
 

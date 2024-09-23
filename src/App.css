@@ -68,65 +68,74 @@
 
 body {
   font-family: "Innovator Grotesk", sans-serif;
-  background-color: #fff;
+  background-color: #fafafa;
   color: #333;
-  padding-top: 1rem;
+}
+
+:root {
+  --primary-color: #ff5a5f;
+  --primary-color-dark: #e44044;
 }
 
 .container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 4rem;
-  @media (max-width: 768px) {
-    padding-left: 2rem;
-    padding-right: 2rem;
+  @media (max-width: 640px) {
+    padding: 2rem;
   }
 }
 
 .banner {
-  position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #ff5a5f;
+  background-color: var(--primary-color);
   color: white;
   text-align: center;
   margin-bottom: 2rem;
-  z-index: 1000;
-  padding: 0.5rem 2rem;
-  @media (max-width: 768px) {
+  padding: 0.75rem 2rem;
+  @apply text-sm font-medium;
+  @media (max-width: 640px) {
     font-size: 0.875rem;
   }
 }
 
 .logo-container {
-  width: 64px;
-  height: 64px;
-  background-color: #ff5a5f;
-  /* background: linear-gradient(
-    to bottom,
-    hsl(358 100% 77% / 1),
-    hsl(357.99deg 100% 70.78%)
-  ); */
-  box-shadow: inset -1px -1px 0 1px rgba(0, 0, 0, 0.01),
+  width: 80px;
+  height: 80px;
+  background-color: var(--primary-color);
+  box-shadow: inset -1px -1px 0 0 rgba(0, 0, 0, 0.01),
     inset 1px 1px 0 0 rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 2rem;
-  @media (max-width: 768px) {
-    margin: 1rem;
+  @apply mb-8;
+  @media (max-width: 640px) {
+    margin-bottom: 1rem;
   }
 }
 
-h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
+.header {
+  h1 {
+    @apply text-5xl font-bold mb-8;
+    background: -webkit-linear-gradient(#555, #333);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+  }
+  h2 {
+    @apply text-2xl text-gray-700 mb-1;
+    text-align: center;
+  }
+  h3 {
+    @apply text-lg text-gray-500 m-0;
+    text-align: center;
+  }
 }
 
 .filter-section {
@@ -141,8 +150,7 @@ h1 {
 }
 
 .filter-button-group {
-  display: flex;
-  gap: 0.5rem;
+  @apply flex flex-row gap-2 flex-wrap;
 }
 
 .filter-button {
@@ -153,6 +161,11 @@ h1 {
   background-color: white;
   cursor: pointer;
   font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-button:hover {
+  background-color: #f0f0f0;
 }
 
 .filter-button.active {
@@ -162,7 +175,7 @@ h1 {
 }
 
 .filter-label {
-  margin-bottom: 0.5rem;
+  @apply text-gray-500 text-sm font-medium mb-2;
 }
 
 select {
@@ -176,10 +189,10 @@ select {
 
 .release-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
   gap: 1.5rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
 }
@@ -189,11 +202,19 @@ select {
   background-color: white;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.02), 0 2px 2px hsl(0deg 0% 0% / 0.02),
-    0 8px 8px hsl(0deg 0% 0% / 0.02), 0 16px 16px hsl(0deg 0% 0% / 0.02),
-    0 24px 24px hsl(0deg 0% 0% / 0.02);
+  box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.016),
+    0 2px 2px hsl(0deg 0% 0% / 0.016), 0 8px 8px hsl(0deg 0% 0% / 0.016),
+    0 16px 16px hsl(0deg 0% 0% / 0.016), 0 24px 24px hsl(0deg 0% 0% / 0.016);
   border: 0.5px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    transform: translateY(-0.2rem);
+    box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.024),
+      0 2px 2px hsl(0deg 0% 0% / 0.024), 0 8px 8px hsl(0deg 0% 0% / 0.024),
+      0 32px 32px hsl(0deg 0% 0% / 0.024), 0 48px 48px hsl(0deg 0% 0% / 0.024);
+  }
 }
+
 .release-card-top {
   position: relative;
 }
@@ -201,19 +222,39 @@ select {
   padding: 1.25rem;
   background-color: white;
   z-index: 10;
+  @apply text-sm;
+  span {
+    @apply text-gray-500 mr-1;
+  }
 }
 
 .gradient-overlay {
   position: absolute;
+  opacity: 0.8;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.8) 10%,
-    rgba(0, 0, 0, 0) 60%
+    to bottom,
+    hsla(0, 0%, 0%, 0) 0%,
+    hsla(0, 0%, 0%, 0.013) 8.1%,
+    hsla(0, 0%, 0%, 0.049) 15.5%,
+    hsla(0, 0%, 0%, 0.104) 22.5%,
+    hsla(0, 0%, 0%, 0.175) 29%,
+    hsla(0, 0%, 0%, 0.259) 35.3%,
+    hsla(0, 0%, 0%, 0.352) 41.2%,
+    hsla(0, 0%, 0%, 0.45) 47.1%,
+    hsla(0, 0%, 0%, 0.55) 52.9%,
+    hsla(0, 0%, 0%, 0.648) 58.8%,
+    hsla(0, 0%, 0%, 0.741) 64.7%,
+    hsla(0, 0%, 0%, 0.825) 71%,
+    hsla(0, 0%, 0%, 0.896) 77.5%,
+    hsla(0, 0%, 0%, 0.951) 84.5%,
+    hsla(0, 0%, 0%, 0.987) 91.9%,
+    hsl(0, 0%, 0%) 100%
   );
+
   z-index: 2;
 }
 
@@ -234,38 +275,44 @@ select {
 }
 
 .tag-container {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  @apply flex flex-row justify-between;
 }
 
 .tag {
-  font-size: 0.75rem;
-  padding: 0.125rem 0.5rem;
-  border-radius: 4px;
   color: #333;
+  @apply rounded font-medium px-1.5 py-0.5 text-xs flex justify-center items-center;
 }
 
 .tag-type {
   background-color: #e4e4e4;
   color: #333;
   background-color: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.open-in-spotify {
+  opacity: 0;
+  @apply bg-green-500 text-white;
+}
+
+.release-card:hover .open-in-spotify {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .artist-name {
-  font-weight: 600;
-  font-size: 1rem;
-  margin-bottom: 0.25rem;
+  @apply font-semibold text-white text-lg leading-5 m-0;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
 
 .album-name {
-  font-style: italic;
-  color: #666;
-  font-size: 0.875rem;
-  margin-bottom: 0.5rem;
+  @apply font-semibold text-white text-lg leading-5 m-0 shadow-md italic;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .album-description,
@@ -273,16 +320,4 @@ select {
   font-size: 0.75rem;
   color: #666;
   margin-bottom: 0.25rem;
-}
-
-.spotify-link {
-  display: inline-block;
-  margin-top: 0.5rem;
-  color: #ff5a5f;
-  font-size: 0.75rem;
-  text-decoration: none;
-}
-
-.spotify-link:hover {
-  text-decoration: underline;
 }

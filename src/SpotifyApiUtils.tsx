@@ -35,6 +35,7 @@ interface SpotifyNewReleasesResponse {
       album_type: string;
       images: Array<{ url: string }>;
       release_date: string;
+      total_tracks: number;
     }>;
   };
 }
@@ -61,9 +62,6 @@ export const fetchNewReleases = async (): Promise<SpotifyNewReleasesResponse> =>
   }
 
   const data: SpotifyNewReleasesResponse = await response.json();
-  console.log(`Fetched ${data.albums.items.length} new releases`);
-  console.log('First release date:', data.albums.items[0]?.release_date);
-  console.log('Last release date:', data.albums.items[data.albums.items.length - 1]?.release_date);
   
   return data;
 };

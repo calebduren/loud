@@ -1,5 +1,5 @@
 import React from 'react';
-
+import FilterButton from './FilterButton';
 interface FiltersProps {
     releaseTypeFilter: string;
     setReleaseTypeFilter: (filter: string) => void;
@@ -8,38 +8,33 @@ interface FiltersProps {
 const Filters: React.FC<FiltersProps> = ({ releaseTypeFilter, setReleaseTypeFilter }) => (
     <div className="filter-section">
         <div className="filter-group ">
-            <label className="filter-label text-gray-500 text-sm">Filter by release length</label>
-            <div className="filter-button-group flex flex-row gap-2 flex-wrap">
-                <button 
-                    className={`filter-button ${releaseTypeFilter === 'All' ? 'active' : ''}`} 
+            <label className="filter-label">Filter by release length</label>
+            <div className="filter-button-group">
+                <FilterButton 
+                    label="All" 
+                    isActive={releaseTypeFilter === 'All'} 
                     onClick={() => setReleaseTypeFilter('All')}
-                >
-                    All
-                </button>
-                <button 
-                    className={`filter-button ${releaseTypeFilter === 'album' ? 'active' : ''}`} 
+                />
+                <FilterButton 
+                    label="Album" 
+                    isActive={releaseTypeFilter === 'album'} 
                     onClick={() => setReleaseTypeFilter('album')}
-                >
-                    Album
-                </button>
-                <button 
-                    className={`filter-button ${releaseTypeFilter === 'ep' ? 'active' : ''}`} 
+                />
+                <FilterButton 
+                    label="EP" 
+                    isActive={releaseTypeFilter === 'ep'} 
                     onClick={() => setReleaseTypeFilter('ep')}
-                >
-                    EP
-                </button>
-                <button 
-                    className={`filter-button ${releaseTypeFilter === 'single' ? 'active' : ''}`} 
+                />
+                <FilterButton 
+                    label="Single" 
+                    isActive={releaseTypeFilter === 'single'} 
                     onClick={() => setReleaseTypeFilter('single')}
-                >
-                    Single
-                </button>
-                <button 
-                    className={`filter-button ${releaseTypeFilter === 'compilation' ? 'active' : ''}`} 
+                />
+                <FilterButton 
+                    label="Compilation" 
+                    isActive={releaseTypeFilter === 'compilation'} 
                     onClick={() => setReleaseTypeFilter('compilation')}
-                >
-                    Compilation
-                </button>
+                />
             </div>
         </div>
     </div>
