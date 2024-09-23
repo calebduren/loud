@@ -5,6 +5,8 @@ import Callback from './components/Callback';
 import { fetchNewReleases } from './SpotifyApiUtils';
 import './App.css';
 import ReleaseCard from './components/ReleaseCard';
+import Header from './components/Header';
+
 interface Release {
   id: string;
   name: string;
@@ -61,16 +63,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="container">
-      <header className="mb-8 flex flex-col gap-4 items-center">
-        <div className="logo-container m-0">
-          <Logo />
-        </div>
-        <div className="flex flex-col gap-1 items-center m-0">
-        <h1 className="text-4xl font-bold m-0">Loud</h1>
-        <p className=" text-gray-700">New music, new releases, new artists.</p>
-        <p className="text-sm text-gray-500">A better way to filter Spotify releases.</p>
-        </div>
-      </header>
+      <Header />
       <div className="filter-section">
         <div className="filter-group">
           <label className="filter-label">Filter by release type</label>

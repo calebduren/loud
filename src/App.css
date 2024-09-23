@@ -1,11 +1,73 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Innovator Grotesk";
+  src: url("./assets/fonts/InnovatorGrotesk-Regular.ttf") format("ttf"),
+    url("./assets/fonts/InnovatorGrotesk-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Innovator Grotesk";
+  src: url("./assets/fonts/InnovatorGrotesk-RegularItalic.ttf") format("ttf"),
+    url("./assets/fonts/InnovatorGrotesk-RegularItalic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Innovator Grotesk";
+  src: url("./assets/fonts/InnovatorGrotesk-Bold.ttf") format("ttf"),
+    url("./assets/fonts/InnovatorGrotesk-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Innovator Grotesk";
+  src: url("./assets/fonts/InnovatorGrotesk-BoldItalic.ttf") format("ttf"),
+    url("./assets/fonts/InnovatorGrotesk-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Innovator Grotesk";
+  src: url("./assets/fonts/InnovatorGrotesk-Medium.ttf") format("ttf"),
+    url("./assets/fonts/InnovatorGrotesk-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Innovator Grotesk";
+  src: url("./assets/fonts/InnovatorGrotesk-MediumItalic.ttf") format("ttf"),
+    url("./assets/fonts/InnovatorGrotesk-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Innovator Grotesk";
+  src: url("./assets/fonts/InnovatorGrotesk-SemiBold.ttf") format("ttf"),
+    url("./assets/fonts/InnovatorGrotesk-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Innovator Grotesk";
+  src: url("./assets/fonts/InnovatorGrotesk-SemiBoldItalic.ttf") format("ttf"),
+    url("./assets/fonts/InnovatorGrotesk-SemiBoldItalic.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+}
+
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Innovator Grotesk", sans-serif;
   background-color: #f5f5f5;
   color: #333;
 }
@@ -13,19 +75,24 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 4rem;
 }
 
 .logo-container {
   width: 64px;
   height: 64px;
   background-color: #ff5a5f;
-  background: linear-gradient(to bottom, #ff6a6f, #ff6a6f);
+  /* background: linear-gradient(
+    to bottom,
+    hsl(358 100% 77% / 1),
+    hsl(357.99deg 100% 70.78%)
+  ); */
+  box-shadow: inset -1px -1px 0 1px rgba(0, 0, 0, 0.01),
+    inset 1px 1px 0 0 rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.5rem;
 }
 
 h1 {
@@ -135,19 +202,19 @@ select {
 
 .tag {
   font-size: 0.75rem;
-  padding: 0.25rem 0.5rem;
+  padding: 0.125rem 0.5rem;
   border-radius: 4px;
-}
-
-.tag-genre {
-  background-color: #ffe4e4;
-  color: #ff5a5f;
+  color: #333;
 }
 
 .tag-type {
   background-color: #e4e4e4;
-  color: #666;
+  color: #333;
   margin-left: auto;
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .artist-name {
