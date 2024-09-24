@@ -16,7 +16,15 @@ interface Release {
   type: string;
   image: string;
   releaseDate: string;
-  totalTracks: any;
+  totalTracks: number;
+}
+
+interface GroupedReleases {
+  [key: string]: {
+    startDate: Date;
+    endDate: Date;
+    releases: Release[];
+  };
 }
 
 const Home: React.FC = () => {
@@ -26,9 +34,12 @@ const Home: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const getWeek = (date: Date) => {
-    const onejan = new Date(date.getFullYear(), 0, 1);
-    return Math.ceil((((date.getTime() - onejan.getTime()) / 86400000) + onejan.getDay() + 1) / 7);
+  const getWeekRange = (date: Date): { startDate: Date; endDate: Date } => {
+    const startDate = new Date(date);
+    startDate.setDate(date.getDate() - date.getDay());
+    const endDate = new Date(startDate);
+    endDate.setDate(startDate.getDate() + 6);
+    return { startDate, endDate };
   };
 
   useEffect(() => {
@@ -37,7 +48,7 @@ const Home: React.FC = () => {
         setIsLoading(true);
         setError(null);
         const data = await fetchNewReleases();
-        const formattedReleases: Release[] = data.albums.items.map(item => ({
+        const formattedReleases: Release[] = data.albums.items.map((item: any) => ({
           id: item.id,
           name: item.name,
           artist: item.artists[0].name,
@@ -47,8 +58,9 @@ const Home: React.FC = () => {
           totalTracks: item.total_tracks,
         }));
 
-        // Sort releases by most recent to least recent
-        const sortedReleases = formattedReleases.sort((a, b) => new Date(b.releaseDate) > new Date(a.releaseDate) ? 1 : -1);
+        const sortedReleases = formattedReleases.sort((a, b) => 
+          new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()
+        );
 
         console.log('Formatted releases:', sortedReleases);
         setReleases(sortedReleases);
@@ -67,49 +79,50 @@ const Home: React.FC = () => {
     const filtered = releases.filter(release => 
       releaseTypeFilter === 'All' || release.type.toLowerCase() === releaseTypeFilter.toLowerCase()
     );
-    // Sort filtered releases by most recent to least recent
-    const sortedFilteredReleases = filtered.sort((a, b) => new Date(b.releaseDate) > new Date(a.releaseDate) ? 1 : -1);
+    const sortedFilteredReleases = filtered.sort((a, b) => 
+      new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()
+    );
     setFilteredReleases(sortedFilteredReleases);
   }, [releases, releaseTypeFilter]);
 
   if (isLoading) return <div className='loading'><Spinner /></div>;
   if (error) return <div className='error'>Error: {error}</div>;
 
-  const groupedReleases = filteredReleases.reduce((acc, release) => {
-    const date = new Date(release.releaseDate);
-    const week = getWeek(date);
-    if (!acc[week]) {
-      acc[week] = { date: date, releases: [] };
+  const groupedReleases: GroupedReleases = filteredReleases.reduce((acc: GroupedReleases, release) => {
+    const releaseDate = new Date(release.releaseDate);
+    const { startDate, endDate } = getWeekRange(releaseDate);
+    const weekKey = startDate.toISOString();
+    
+    if (!acc[weekKey]) {
+      acc[weekKey] = { startDate, endDate, releases: [] };
     }
-    acc[week].releases.push(release);
+    acc[weekKey].releases.push(release);
     return acc;
   }, {});
 
   return (
     <>
-    <Banner />
-    <div className="container">
-      <Header />
-      <Filters setReleaseTypeFilter={setReleaseTypeFilter} releaseTypeFilter={releaseTypeFilter} />
-      {Object.entries(groupedReleases).sort((a, b) => new Date(b[1].date) > new Date(a[1].date) ? 1 : -1).map(([week, { date, releases }]) => {
-        const startDate = new Date(date);
-        startDate.setDate(date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1));
-        const endDate = new Date(date);
-        endDate.setDate(date.getDate() - date.getDay() + 7);
-        const startDateString = startDate.toLocaleDateString('en-US', { month: 'long' }) + ' ' + startDate.getDate();
-        const endDateString = endDate.toLocaleDateString('en-US', { month: 'long' }) + ' ' + endDate.getDate() + ', ' + endDate.getFullYear();
-        return (
-          <>
-            <h4 className="release-date-header">{startDateString} to {endDateString}</h4>
-            <div key={week} className="release-grid">
-              {releases.map((release: Release) => (
-                <ReleaseCard key={release.id} release={release}/>
-              ))}
-            </div>
-          </>
-        );
-      })}
-    </div>
+      <Banner />
+      <div className="container">
+        <Header />
+        <Filters setReleaseTypeFilter={setReleaseTypeFilter} releaseTypeFilter={releaseTypeFilter} />
+        {Object.entries(groupedReleases)
+          .sort(([, a], [, b]) => b.startDate.getTime() - a.startDate.getTime())
+          .map(([weekKey, { startDate, endDate, releases }]) => {
+            const startDateString = startDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+            const endDateString = endDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            return (
+              <React.Fragment key={weekKey}>
+                <h4 className="release-date-header">{startDateString} to {endDateString}</h4>
+                <div className="release-grid">
+                  {releases.map((release: Release) => (
+                    <ReleaseCard key={release.id} release={release}/>
+                  ))}
+                </div>
+              </React.Fragment>
+            );
+          })}
+      </div>
     </>
   );
 };
