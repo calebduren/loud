@@ -247,6 +247,10 @@ select {
   min-width: 150px;
 }
 
+.release-meta-item {
+  @apply flex flex-row gap-4;
+}
+
 .release-date-header {
   @apply text-sm font-medium mb-4 mt-8;
   color: var(--text-500);
@@ -271,7 +275,7 @@ select {
 .release-card {
   position: relative;
   background-color: var(--background-color);
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.016),
     0 2px 2px hsl(0deg 0% 0% / 0.016), 0 8px 8px hsl(0deg 0% 0% / 0.016),
@@ -283,13 +287,14 @@ select {
     box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.024),
       0 2px 2px hsl(0deg 0% 0% / 0.024), 0 8px 8px hsl(0deg 0% 0% / 0.024),
       0 32px 32px hsl(0deg 0% 0% / 0.024), 0 48px 48px hsl(0deg 0% 0% / 0.024);
-    .release-card-bottom {
+
+    .release-card-bottom-content {
       background-color: var(--background-color-hover);
     }
   }
   @media (pointer: fine) {
     &:hover {
-      transform: translateY(-0.2rem);
+      transform: translateY(-0.1rem);
     }
   }
   @media (prefers-color-scheme: dark) {
@@ -300,15 +305,35 @@ select {
 .release-card-top {
   position: relative;
 }
+
+.release-info {
+  padding: calc(1.25rem + 1px) calc(1.25rem + 1px) calc(1rem + 1px)
+    calc(1.25rem + 1px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  @apply absolute flex flex-col justify-between h-full w-full;
+}
+
 .release-card-bottom {
-  padding: 1.25rem;
-  background-color: var(--background-color);
+  padding: 0.25rem;
+  background-color: black;
   z-index: 10;
   @apply text-sm;
   transition: background-color 0.2s ease-in-out;
   .label {
     @apply mr-0.5 w-[60px];
     color: var(--text-500);
+  }
+  .release-card-bottom-content {
+    background: var(--background-color);
+    border: 1px solid var(--border-color-weak);
+    @apply flex flex-col gap-3 rounded;
+    border-radius: 2px 2px 7px 7px;
+    padding: 1rem;
   }
 }
 
@@ -326,7 +351,6 @@ select {
 
 .gradient-overlay {
   position: absolute;
-  opacity: 0.8;
   top: 0;
   left: 0;
   width: 100%;
@@ -350,23 +374,6 @@ select {
     hsla(0, 0%, 0%, 0.987) 91.9%,
     hsl(0, 0%, 0%) 100%
   );
-
-  z-index: 2;
-}
-
-.release-info {
-  padding: 1.25rem;
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
   z-index: 2;
 }
 
@@ -402,7 +409,7 @@ select {
 }
 
 .album-name {
-  @apply font-semibold text-white text-lg leading-5 m-0 shadow-md italic;
+  @apply font-semibold text-white text-lg leading-5 m-0 italic;
   text-shadow: 0 0 4px 1px rgba(0, 0, 0, 1);
   display: -webkit-box;
   -webkit-line-clamp: 3;
