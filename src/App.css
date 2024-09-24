@@ -153,11 +153,13 @@ body {
       @apply text-2xl mb-3 font-medium text-center leading-tight;
       color: hsl(0, 0%, 30%);
       text-align: center;
+      text-wrap: balance;
     }
     h3 {
       @apply text-sm m-0 text-center font-medium;
       text-align: center;
       color: hsl(0, 0%, 50%);
+      text-wrap: balance;
     }
   }
 }

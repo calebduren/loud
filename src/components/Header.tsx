@@ -10,7 +10,7 @@ const Header: React.FC = () => {
     </div>
     <div className="header-text">
         <h1>Loud</h1>
-        <h2>Find your next favorite record</h2>
+        <h2>Find your next favorite&nsbsp;record</h2>
         <div className="flex items-center gap-1"><QuestionMark /> <h3>Loud is an app to filter Spotify new releases</h3></div>
     </div>
     </header>
