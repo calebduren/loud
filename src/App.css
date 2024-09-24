@@ -71,8 +71,8 @@
   @media (max-width: 520px) {
     font-size: 15px;
   }
-  --primary-color: hsl(358, 100%, 67%);
-  --primary-color-dark: hsl(358, 100%, 64%);
+  --primary-color: hsl(372 80% 64%);
+  --primary-color-dark: hsl(372 80% 60%);
   --text-500: hsl(0, 0%, 50%);
   --text-700: hsl(0, 0%, 30%);
   --text-800: hsl(0, 0%, 20%);
