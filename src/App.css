@@ -247,6 +247,11 @@ select {
   min-width: 150px;
 }
 
+.release-date-header {
+  @apply text-sm font-medium mb-4 mt-8;
+  color: var(--text-500);
+}
+
 .release-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(200px, 1fr));
