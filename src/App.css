@@ -315,6 +315,10 @@ select {
   position: relative;
 }
 
+.release-info-container {
+  @apply flex flex-col gap-3;
+}
+
 .release-info {
   padding: calc(1.25rem + 4px) calc(1.25rem + 4px) calc(0.75rem + 4px)
     calc(1.25rem + 4px);
@@ -337,9 +341,9 @@ select {
     color: var(--text-500);
   }
   .release-card-bottom-content {
+    @apply flex flex-col gap-3 rounded;
     background: var(--background-color);
     border: 1px solid var(--border-color-weak);
-    @apply flex flex-col gap-3 rounded;
     border-radius: 2px 2px 7px 7px;
     padding: 1.25rem;
     transition: background-color 0.2s ease-in-out;
@@ -414,14 +418,14 @@ select {
   transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
-.artist-name {
-  @apply font-semibold text-white text-lg leading-5 m-0;
+.artist-name,
+.album-name {
+  @apply font-medium text-white text-xl leading-5 m-0;
   text-shadow: 0 0 4px 1px rgba(0, 0, 0, 1);
 }
 
 .album-name {
-  @apply font-semibold text-white text-lg leading-5 m-0 italic;
-  text-shadow: 0 0 4px 1px rgba(0, 0, 0, 1);
+  @apply italic;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;

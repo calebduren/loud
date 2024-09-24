@@ -20,7 +20,7 @@ const ReleaseCard: React.FC<{ release: Release }> = ({ release }) => (
                     <span className="tag tag-type font-semibold">{release.type === "ep" ? "EP" : release.type.charAt(0).toUpperCase() + release.type.slice(1)}</span>
                     <div className="open-in-spotify tag">Open in Spotify ↗</div>
                 </div>
-                <div className="release-info-container flex flex-col gap-2">
+                <div className="release-info-container">
                     <h3 className="artist-name">{release.artist}</h3>
                     <p className="album-name">{release.name}</p>
                 </div>
