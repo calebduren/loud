@@ -71,8 +71,8 @@
   @media (max-width: 520px) {
     font-size: 15px;
   }
-  --primary-color: rgb(255, 90, 95);
-  --primary-color-dark: rgb(228, 64, 68);
+  --primary-color: hsl(358, 100%, 67%);
+  --primary-color-dark: hsl(358, 100%, 64%);
   --text-500: hsl(0, 0%, 50%);
   --text-700: hsl(0, 0%, 30%);
   --text-800: hsl(0, 0%, 20%);
@@ -84,17 +84,19 @@
   --dark-theme-text: hsl(0, 0%, 98%);
   --border-color: hsla(0, 0%, 80%, 0.4);
   --border-color-strong: hsla(0, 0%, 80%, 0.6);
+  --border-color-weak: hsla(0, 0%, 80%, 0.2);
 
   @media (prefers-color-scheme: dark) {
-    --body-background: hsl(0, 0%, 4%);
-    --background-color: hsl(0, 0%, 8%);
+    --body-background: hsl(0, 0%, 8%);
+    --background-color: hsl(0, 0%, 10%);
     --background-color-hover: hsl(0, 0%, 10%);
     --text: var(--dark-theme-text);
     --text-500: hsl(0, 0%, 50%);
     --text-700: hsl(0, 0%, 70%);
     --text-800: hsl(0, 0%, 90%);
-    --border-color: hsla(0, 0%, 80%, 0.1);
-    --border-color-strong: hsla(0, 0%, 80%, 0.2);
+    --border-color: hsla(0, 0%, 80%, 0.05);
+    --border-color-strong: hsla(0, 0%, 80%, 0.1);
+    --border-color-weak: hsla(0, 0%, 80%, 0.025);
   }
 }
 
@@ -156,13 +158,11 @@ body {
     margin-bottom: 1rem;
   }
   @media (prefers-color-scheme: dark) {
-    background: linear-gradient(to top, hsl(0 0% 6% / 1), hsl(0 0% 10% / 1));
-    box-shadow: inset -1px -1px 0px 0 rgba(0, 0, 0, 0.8),
-      inset 1px 1px 0 0 rgba(255, 255, 255, 0.01),
-      -1px -1px 1px hsl(0deg 0% 30% / 0.024),
-      -2px -2px 2px hsl(0deg 0% 50% / 0.024),
-      -4px -8px 8px hsl(0deg 0% 60% / 0.024),
-      -10px -20px 20px hsl(0deg 0% 70% / 0.024);
+    background: linear-gradient(to top, hsl(0 0% 9% / 1), hsl(0 0% 18% / 1));
+    box-shadow: inset -1px -1px 0px 0 rgba(0, 0, 0, 0.03),
+      inset 1px 1px 1px 0 rgba(255, 255, 255, 0.05),
+      0 1px 1px hsl(0deg 0% 0% / 0.15), 0 2px 2px hsl(0deg 0% 0% / 0.15),
+      0 8px 8px hsl(0deg 0% 0% / 0.15), 0 20px 20px hsl(0deg 0% 0% / 0.15);
   }
 }
 
@@ -180,15 +180,6 @@ body {
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       letter-spacing: -0.02em;
-
-      @media (prefers-color-scheme: dark) {
-        background: -webkit-linear-gradient(
-          var(--primary-color) 0%,
-          var(--primary-color-dark) 75%
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
     }
     h2 {
       @apply text-2xl mb-2 font-medium text-center leading-tight;
@@ -295,6 +286,9 @@ select {
       background-color: var(--background-color-hover);
     }
   }
+  @media (prefers-color-scheme: dark) {
+    border-color: var(--border-color-weak);
+  }
 }
 
 .release-card-top {
@@ -398,12 +392,12 @@ select {
 
 .artist-name {
   @apply font-semibold text-white text-lg leading-5 m-0;
-  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0 4px 1px rgba(0, 0, 0, 1);
 }
 
 .album-name {
   @apply font-semibold text-white text-lg leading-5 m-0 shadow-md italic;
-  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0 4px 1px rgba(0, 0, 0, 1);
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
