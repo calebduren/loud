@@ -66,21 +66,48 @@
   font-style: italic;
 }
 
-body {
-  font-family: "Innovator Grotesk", sans-serif;
-  background-color: #fafafa;
-  color: #333;
-}
-
 :root {
+  font-size: 16px;
+  @media (max-width: 520px) {
+    font-size: 15px;
+  }
   --primary-color: rgb(255, 90, 95);
   --primary-color-dark: rgb(228, 64, 68);
+  --text-500: hsl(0, 0%, 50%);
+  --text-700: hsl(0, 0%, 30%);
+  --text-800: hsl(0, 0%, 20%);
+  --text: hsl(0, 0%, 5%);
+  --body-background: hsl(0, 0%, 94%);
+  --background-color: hsl(0, 0%, 99%);
+  --background-color-hover: hsl(0, 0%, 97%);
+  --dark-theme-background: hsl(0, 0%, 4%);
+  --dark-theme-text: hsl(0, 0%, 98%);
+  --border-color: hsla(0, 0%, 80%, 0.4);
+  --border-color-strong: hsla(0, 0%, 80%, 0.6);
+
+  @media (prefers-color-scheme: dark) {
+    --body-background: hsl(0, 0%, 4%);
+    --background-color: hsl(0, 0%, 8%);
+    --background-color-hover: hsl(0, 0%, 10%);
+    --text: var(--dark-theme-text);
+    --text-500: hsl(0, 0%, 50%);
+    --text-700: hsl(0, 0%, 70%);
+    --text-800: hsl(0, 0%, 90%);
+    --border-color: hsla(0, 0%, 80%, 0.1);
+    --border-color-strong: hsla(0, 0%, 80%, 0.2);
+  }
+}
+
+body {
+  font-family: "Innovator Grotesk", sans-serif;
+  background-color: var(--body-background);
+  color: var(--text);
 }
 
 .loading,
 .error {
   @apply flex flex-col gap-4 text-center font-medium w-full h-screen items-center justify-center;
-  color: hsl(0, 0%, 50%);
+  color: var(--text-500);
 }
 
 .container {
@@ -114,12 +141,8 @@ body {
 .logo-container {
   width: 80px;
   height: 80px;
-  background: linear-gradient(
-    to bottom,
-    hsl(0 0% 96.5% / 1),
-    hsl(0 0% 91% / 1)
-  );
-  box-shadow: inset -1px -1px 1px 0 rgba(0, 0, 0, 0.03),
+  background: linear-gradient(to bottom, hsl(0 0% 97% / 1), hsl(0 0% 90% / 1));
+  box-shadow: inset -1px -1px 0px 0 rgba(0, 0, 0, 0.03),
     inset 1px 1px 1px 0 rgba(255, 255, 255, 0.6),
     0 1px 1px hsl(0deg 0% 0% / 0.024), 0 2px 2px hsl(0deg 0% 0% / 0.024),
     0 8px 8px hsl(0deg 0% 0% / 0.024), 0 20px 20px hsl(0deg 0% 0% / 0.024),
@@ -132,6 +155,15 @@ body {
   @media (max-width: 640px) {
     margin-bottom: 1rem;
   }
+  @media (prefers-color-scheme: dark) {
+    background: linear-gradient(to top, hsl(0 0% 6% / 1), hsl(0 0% 10% / 1));
+    box-shadow: inset -1px -1px 0px 0 rgba(0, 0, 0, 0.8),
+      inset 1px 1px 0 0 rgba(255, 255, 255, 0.01),
+      -1px -1px 1px hsl(0deg 0% 30% / 0.024),
+      -2px -2px 2px hsl(0deg 0% 50% / 0.024),
+      -4px -8px 8px hsl(0deg 0% 60% / 0.024),
+      -10px -20px 20px hsl(0deg 0% 70% / 0.024);
+  }
 }
 
 .header {
@@ -140,25 +172,34 @@ body {
     @apply flex flex-col items-center m-0 max-w-full;
 
     h1 {
-      @apply text-5xl font-bold mb-8;
+      @apply text-5xl font-bold mb-2;
       background: -webkit-linear-gradient(
-        hsl(0, 0%, 40%) 0%,
-        hsl(0, 0%, 20%) 75%
+        var(--text-700) 0%,
+        var(--text-800) 75%
       );
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       letter-spacing: -0.02em;
+
+      @media (prefers-color-scheme: dark) {
+        background: -webkit-linear-gradient(
+          var(--primary-color) 0%,
+          var(--primary-color-dark) 75%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
     }
     h2 {
-      @apply text-2xl mb-3 font-medium text-center leading-tight;
-      color: hsl(0, 0%, 30%);
+      @apply text-2xl mb-2 font-medium text-center leading-tight;
+      color: var(--text-700);
       text-align: center;
       text-wrap: balance;
     }
     h3 {
       @apply text-sm m-0 text-center font-medium;
       text-align: center;
-      color: hsl(0, 0%, 50%);
+      color: var(--text-500);
       text-wrap: balance;
     }
   }
@@ -180,17 +221,18 @@ body {
 
 .filter-button {
   padding: 0.25rem 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   font-size: 0.875rem;
-  background-color: white;
+  background-color: var(--body-background);
   cursor: pointer;
   font-weight: 600;
   transition: all 0.2s ease-in-out;
 }
 
 .filter-button:hover {
-  background-color: #f0f0f0;
+  background-color: var(--background-color);
+  border-color: var(--border-color-strong);
 }
 
 .filter-button.active {
@@ -205,7 +247,7 @@ body {
 
 .filter-label {
   @apply text-sm font-medium mb-2;
-  color: hsl(0, 0%, 50%);
+  color: var(--text-500);
 }
 
 select {
@@ -235,19 +277,23 @@ select {
 
 .release-card {
   position: relative;
-  background-color: white;
+  background-color: var(--background-color);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.016),
     0 2px 2px hsl(0deg 0% 0% / 0.016), 0 8px 8px hsl(0deg 0% 0% / 0.016),
     0 16px 16px hsl(0deg 0% 0% / 0.016), 0 24px 24px hsl(0deg 0% 0% / 0.016);
-  border: 0.5px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
   transition: all 0.2s ease-in-out;
   &:hover {
     transform: translateY(-0.2rem);
+    border-color: var(--border-color-strong);
     box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.024),
       0 2px 2px hsl(0deg 0% 0% / 0.024), 0 8px 8px hsl(0deg 0% 0% / 0.024),
       0 32px 32px hsl(0deg 0% 0% / 0.024), 0 48px 48px hsl(0deg 0% 0% / 0.024);
+    .release-card-bottom {
+      background-color: var(--background-color-hover);
+    }
   }
 }
 
@@ -256,13 +302,26 @@ select {
 }
 .release-card-bottom {
   padding: 1.25rem;
-  background-color: white;
+  background-color: var(--background-color);
   z-index: 10;
   @apply text-sm;
+  transition: background-color 0.2s ease-in-out;
   .label {
     @apply mr-0.5 w-[60px];
-    color: hsl(0, 0%, 50%);
+    color: var(--text-500);
   }
+}
+
+.touch-only {
+  display: none;
+  @media (pointer: coarse) {
+    display: block;
+  }
+}
+
+.faux-link {
+  @apply text-sm font-semibold;
+  color: var(--primary-color);
 }
 
 .gradient-overlay {

@@ -29,6 +29,7 @@ const ReleaseCard: React.FC<{ release: Release }> = ({ release }) => (
         <div className="release-card-bottom flex flex-col gap-3">
             <div className="release-date flex flex-row gap-4"><div className="label">Released</div> {new Date(release.releaseDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</div>
             <div className="total-tracks flex flex-row gap-4"><div className="label">Tracks</div> {release.totalTracks}</div>
+            <div className="touch-only faux-link">Open in Spotify ↗</div>
         </div>
     </a>
   );
