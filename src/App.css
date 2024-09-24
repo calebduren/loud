@@ -88,15 +88,16 @@
 
   @media (prefers-color-scheme: dark) {
     --body-background: hsl(0, 0%, 8%);
-    --background-color: hsl(0, 0%, 10%);
-    --background-color-hover: hsl(0, 0%, 12%);
+    /* --background-color: hsl(0, 0%, 10%); */
+    --background-color: hsl(0, 0%, 17%);
+    --background-color-hover: hsl(0, 0%, 22%);
     --text: var(--dark-theme-text);
     --text-500: hsl(0, 0%, 50%);
     --text-700: hsl(0, 0%, 70%);
     --text-800: hsl(0, 0%, 90%);
-    --border-color: hsla(0, 0%, 80%, 0.05);
-    --border-color-strong: hsla(0, 0%, 80%, 0.1);
-    --border-color-weak: hsla(0, 0%, 80%, 0.025);
+    --border-color: hsla(0, 0%, 80%, 0.2);
+    --border-color-strong: hsla(0, 0%, 80%, 0.4);
+    --border-color-weak: hsla(0, 0%, 80%, 0.06);
   }
 }
 
@@ -311,7 +312,7 @@ select {
       0 8px 8px hsl(0deg 0% 0% / 0.1), 0 16px 16px hsl(0deg 0% 0% / 0.1),
       0 24px 24px hsl(0deg 0% 0% / 0.1);
     &:hover {
-      border-color: var(--border-color-strong);
+      border-color: var(--border-color);
       box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.16),
         0 2px 2px hsl(0deg 0% 0% / 0.16), 0 8px 8px hsl(0deg 0% 0% / 0.16),
         0 32px 32px hsl(0deg 0% 0% / 0.16), 0 48px 48px hsl(0deg 0% 0% / 0.16);
@@ -342,7 +343,7 @@ select {
 .release-card-bottom {
   @apply text-sm;
   padding: 3px;
-  background-color: #000;
+  background-color: hsl(0, 0%, 10%);
   transition: background-color 0.2s ease-in-out;
   .label {
     @apply mr-0.5 w-[60px];
@@ -381,22 +382,22 @@ select {
   z-index: 2;
   background: linear-gradient(
     to bottom,
-    hsla(0, 0%, 0%, 0) 0%,
-    hsla(0, 0%, 0%, 0.013) 8.1%,
-    hsla(0, 0%, 0%, 0.049) 15.5%,
-    hsla(0, 0%, 0%, 0.104) 22.5%,
-    hsla(0, 0%, 0%, 0.175) 29%,
-    hsla(0, 0%, 0%, 0.259) 35.3%,
-    hsla(0, 0%, 0%, 0.352) 41.2%,
-    hsla(0, 0%, 0%, 0.45) 47.1%,
-    hsla(0, 0%, 0%, 0.55) 52.9%,
-    hsla(0, 0%, 0%, 0.648) 58.8%,
-    hsla(0, 0%, 0%, 0.741) 64.7%,
-    hsla(0, 0%, 0%, 0.825) 71%,
-    hsla(0, 0%, 0%, 0.896) 77.5%,
-    hsla(0, 0%, 0%, 0.951) 84.5%,
-    hsla(0, 0%, 0%, 0.987) 91.9%,
-    hsl(0, 0%, 0%) 100%
+    hsla(0, 0%, 10%, 0) 0%,
+    hsla(0, 0%, 10%, 0.013) 8.1%,
+    hsla(0, 0%, 10%, 0.049) 15.5%,
+    hsla(0, 0%, 10%, 0.104) 22.5%,
+    hsla(0, 0%, 10%, 0.175) 29%,
+    hsla(0, 0%, 10%, 0.259) 35.3%,
+    hsla(0, 0%, 10%, 0.352) 41.2%,
+    hsla(0, 0%, 10%, 0.45) 47.1%,
+    hsla(0, 0%, 10%, 0.55) 52.9%,
+    hsla(0, 0%, 10%, 0.648) 58.8%,
+    hsla(0, 0%, 10%, 0.741) 64.7%,
+    hsla(0, 0%, 10%, 0.825) 71%,
+    hsla(0, 0%, 10%, 0.896) 77.5%,
+    hsla(0, 0%, 10%, 0.951) 84.5%,
+    hsla(0, 0%, 10%, 0.987) 91.9%,
+    hsl(0, 0%, 10%) 100%
   );
 }
 
