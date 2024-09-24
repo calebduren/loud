@@ -316,8 +316,8 @@ select {
 }
 
 .release-info {
-  padding: calc(1.25rem + 1px) calc(1.25rem + 1px) calc(1rem + 1px)
-    calc(1.25rem + 1px);
+  padding: calc(1.25rem + 4px) calc(1.25rem + 4px) calc(0.75rem + 4px)
+    calc(1.25rem + 4px);
   position: absolute;
   top: 0;
   left: 0;
@@ -328,10 +328,9 @@ select {
 }
 
 .release-card-bottom {
-  padding: 0.25rem;
-  background-color: black;
-  z-index: 10;
   @apply text-sm;
+  padding: 3px;
+  background-color: #000;
   transition: background-color 0.2s ease-in-out;
   .label {
     @apply mr-0.5 w-[60px];
@@ -342,7 +341,7 @@ select {
     border: 1px solid var(--border-color-weak);
     @apply flex flex-col gap-3 rounded;
     border-radius: 2px 2px 7px 7px;
-    padding: 1rem;
+    padding: 1.25rem;
     transition: background-color 0.2s ease-in-out;
   }
 }

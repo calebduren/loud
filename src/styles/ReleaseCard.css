@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.release-card {
+  position: relative;
+  background-color: var(--background-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.016),
+    0 2px 2px hsl(0deg 0% 0% / 0.016), 0 8px 8px hsl(0deg 0% 0% / 0.016),
+    0 16px 16px hsl(0deg 0% 0% / 0.016), 0 24px 24px hsl(0deg 0% 0% / 0.016);
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    border-color: var(--border-color-strong);
+    box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.024),
+      0 2px 2px hsl(0deg 0% 0% / 0.024), 0 8px 8px hsl(0deg 0% 0% / 0.024),
+      0 32px 32px hsl(0deg 0% 0% / 0.024), 0 48px 48px hsl(0deg 0% 0% / 0.024);
+
+    .release-card-bottom-content {
+      background-color: var(--background-color-hover);
+    }
+  }
+  @media (pointer: fine) {
+    &:hover {
+      transform: translateY(-0.1rem);
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    border-color: var(--border-color-weak);
+    box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.1), 0 2px 2px hsl(0deg 0% 0% / 0.1),
+      0 8px 8px hsl(0deg 0% 0% / 0.1), 0 16px 16px hsl(0deg 0% 0% / 0.1),
+      0 24px 24px hsl(0deg 0% 0% / 0.1);
+    &:hover {
+      border-color: var(--border-color-strong);
+      box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.16),
+        0 2px 2px hsl(0deg 0% 0% / 0.16), 0 8px 8px hsl(0deg 0% 0% / 0.16),
+        0 32px 32px hsl(0deg 0% 0% / 0.16), 0 48px 48px hsl(0deg 0% 0% / 0.16);
+    }
+  }
+}
+
+.release-card-top {
+  position: relative;
+}
+
+.release-info {
+  padding: calc(1.25rem + 1px) calc(1.25rem + 1px) calc(1rem + 1px)
+    calc(1.25rem + 1px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  @apply absolute flex flex-col justify-between h-full w-full;
+}
+
+.release-card-bottom {
+  padding: 0.125rem;
+  background-color: black;
+  z-index: 10;
+  @apply text-sm;
+  transition: background-color 0.2s ease-in-out;
+  .label {
+    @apply mr-0.5 w-[60px];
+    color: var(--text-500);
+  }
+  .release-card-bottom-content {
+    background: var(--background-color);
+    border: 1px solid var(--border-color-weak);
+    @apply flex flex-col gap-3 rounded;
+    border-radius: 2px 2px 7px 7px;
+    padding: 1rem;
+    transition: background-color 0.2s ease-in-out;
+  }
+}
+
+.touch-only {
+  display: none;
+  @media (pointer: coarse) {
+    display: block;
+  }
+}
+
+.faux-link {
+  @apply text-sm font-semibold;
+  color: var(--primary-color);
+}
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    hsla(0, 0%, 0%, 0) 0%,
+    hsla(0, 0%, 0%, 0.013) 8.1%,
+    hsla(0, 0%, 0%, 0.049) 15.5%,
+    hsla(0, 0%, 0%, 0.104) 22.5%,
+    hsla(0, 0%, 0%, 0.175) 29%,
+    hsla(0, 0%, 0%, 0.259) 35.3%,
+    hsla(0, 0%, 0%, 0.352) 41.2%,
+    hsla(0, 0%, 0%, 0.45) 47.1%,
+    hsla(0, 0%, 0%, 0.55) 52.9%,
+    hsla(0, 0%, 0%, 0.648) 58.8%,
+    hsla(0, 0%, 0%, 0.741) 64.7%,
+    hsla(0, 0%, 0%, 0.825) 71%,
+    hsla(0, 0%, 0%, 0.896) 77.5%,
+    hsla(0, 0%, 0%, 0.951) 84.5%,
+    hsla(0, 0%, 0%, 0.987) 91.9%,
+    hsl(0, 0%, 0%) 100%
+  );
+}
+
+.tag-container {
+  @apply flex flex-row justify-between;
+}
+
+.tag {
+  color: #333;
+  @apply rounded font-medium px-1.5 py-0.5 text-xs flex justify-center items-center;
+}
+
+.tag-type {
+  background-color: #e4e4e4;
+  color: #333;
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.open-in-spotify {
+  opacity: 0;
+  @apply bg-green-500 text-white;
+}
+
+.release-card:hover .open-in-spotify {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.artist-name {
+  @apply font-semibold text-white text-lg leading-5 m-0;
+  text-shadow: 0 0 4px 1px rgba(0, 0, 0, 1);
+}
+
+.album-name {
+  @apply font-semibold text-white text-lg leading-5 m-0 italic;
+  text-shadow: 0 0 4px 1px rgba(0, 0, 0, 1);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.album-description,
+.similar-artists {
+  font-size: 0.75rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
