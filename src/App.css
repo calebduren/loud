@@ -89,7 +89,7 @@
   @media (prefers-color-scheme: dark) {
     --body-background: hsl(0, 0%, 8%);
     --background-color: hsl(0, 0%, 10%);
-    --background-color-hover: hsl(0, 0%, 10%);
+    --background-color-hover: hsl(0, 0%, 12%);
     --text: var(--dark-theme-text);
     --text-500: hsl(0, 0%, 50%);
     --text-700: hsl(0, 0%, 70%);
@@ -299,6 +299,15 @@ select {
   }
   @media (prefers-color-scheme: dark) {
     border-color: var(--border-color-weak);
+    box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.1), 0 2px 2px hsl(0deg 0% 0% / 0.1),
+      0 8px 8px hsl(0deg 0% 0% / 0.1), 0 16px 16px hsl(0deg 0% 0% / 0.1),
+      0 24px 24px hsl(0deg 0% 0% / 0.1);
+    &:hover {
+      border-color: var(--border-color-strong);
+      box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.16),
+        0 2px 2px hsl(0deg 0% 0% / 0.16), 0 8px 8px hsl(0deg 0% 0% / 0.16),
+        0 32px 32px hsl(0deg 0% 0% / 0.16), 0 48px 48px hsl(0deg 0% 0% / 0.16);
+    }
   }
 }
 
@@ -334,6 +343,7 @@ select {
     @apply flex flex-col gap-3 rounded;
     border-radius: 2px 2px 7px 7px;
     padding: 1rem;
+    transition: background-color 0.2s ease-in-out;
   }
 }
 
@@ -353,8 +363,11 @@ select {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0px;
   width: 100%;
   height: 100%;
+  z-index: 2;
   background: linear-gradient(
     to bottom,
     hsla(0, 0%, 0%, 0) 0%,
@@ -374,7 +387,6 @@ select {
     hsla(0, 0%, 0%, 0.987) 91.9%,
     hsl(0, 0%, 0%) 100%
   );
-  z-index: 2;
 }
 
 .tag-container {
