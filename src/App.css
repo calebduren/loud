@@ -92,7 +92,7 @@
     --background-color: hsl(0, 0%, 17%);
     --background-color-hover: hsl(0, 0%, 22%);
     --text: var(--dark-theme-text);
-    --text-500: hsl(0, 0%, 50%);
+    --text-500: hsl(0, 0%, 60%);
     --text-700: hsl(0, 0%, 70%);
     --text-800: hsl(0, 0%, 90%);
     --border-color: hsla(0, 0%, 80%, 0.2);
@@ -142,8 +142,7 @@ body {
 }
 
 .logo-container {
-  width: 80px;
-  height: 80px;
+  @apply flex items-center w-20 h-20 justify-center mb-8;
   background: linear-gradient(to bottom, hsl(0 0% 97% / 1), hsl(0 0% 90% / 1));
   box-shadow: inset -1px -1px 0px 0 rgba(0, 0, 0, 0.03),
     inset 1px 1px 1px 0 rgba(255, 255, 255, 0.6),
@@ -151,10 +150,6 @@ body {
     0 8px 8px hsl(0deg 0% 0% / 0.024), 0 20px 20px hsl(0deg 0% 0% / 0.024),
     0 32px 32px hsl(0deg 0% 0% / 0.024);
   border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @apply mb-12;
   @media (max-width: 640px) {
     margin-bottom: 1rem;
   }
@@ -168,7 +163,7 @@ body {
 }
 
 .header {
-  @apply mb-20 flex flex-col gap-4 items-center;
+  @apply mb-24 flex flex-col gap-4 items-center;
   .header-text {
     @apply flex flex-col items-center m-0 max-w-full;
 
@@ -180,18 +175,23 @@ body {
       letter-spacing: -0.02em;
     }
     h2 {
-      @apply text-2xl mb-2 font-medium text-center leading-tight;
+      @apply text-2xl mb-4 font-medium text-center leading-tight;
       color: var(--text-700);
       text-align: center;
       text-wrap: balance;
     }
     h3 {
-      @apply text-sm m-0 text-center font-medium;
+      @apply text-sm m-0 text-center font-normal;
       text-align: center;
       color: var(--text-500);
       text-wrap: balance;
     }
   }
+}
+
+.loud-description {
+  @apply flex items-center gap-2 px-4 py-1 rounded-full;
+  border: 1px solid var(--border-color-strong);
 }
 
 .filter-section {
