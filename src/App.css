@@ -116,10 +116,7 @@ body {
 .container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 4rem;
-  @media (max-width: 640px) {
-    padding: 2rem;
-  }
+  @apply sm:p-16 p-10;
 }
 
 .banner {
@@ -134,25 +131,19 @@ body {
   text-align: center;
   margin-bottom: 2rem;
   padding: 0.75rem 2rem;
-  @apply text-sm font-medium leading-tight;
+  @apply text-sm sm:text-base font-medium leading-tight;
   text-wrap: balance;
-  @media (max-width: 640px) {
-    font-size: 0.875rem;
-  }
 }
 
 .logo-container {
-  @apply flex items-center w-20 h-20 justify-center mb-8;
+  @apply flex items-center w-20 h-20 justify-center mb-4 sm:mb-8;
   background: linear-gradient(to bottom, hsl(0 0% 97% / 1), hsl(0 0% 90% / 1));
+  border-radius: 16px;
   box-shadow: inset -1px -1px 0px 0 rgba(0, 0, 0, 0.03),
     inset 1px 1px 1px 0 rgba(255, 255, 255, 0.6),
     0 1px 1px hsl(0deg 0% 0% / 0.024), 0 2px 2px hsl(0deg 0% 0% / 0.024),
     0 8px 8px hsl(0deg 0% 0% / 0.024), 0 20px 20px hsl(0deg 0% 0% / 0.024),
     0 32px 32px hsl(0deg 0% 0% / 0.024);
-  border-radius: 16px;
-  @media (max-width: 640px) {
-    margin-bottom: 1rem;
-  }
   @media (prefers-color-scheme: dark) {
     background: linear-gradient(to top, hsl(0 0% 9% / 1), hsl(0 0% 18% / 1));
     box-shadow: inset -1px -1px 0px 0 rgba(0, 0, 0, 0.03),
@@ -163,19 +154,19 @@ body {
 }
 
 .header {
-  @apply mb-24 flex flex-col gap-4 items-center;
+  @apply mb-20 flex flex-col gap-4 items-center;
   .header-text {
     @apply flex flex-col items-center m-0 max-w-full;
 
     h1 {
-      @apply text-5xl font-bold mb-2;
+      @apply text-4xl sm:text-5xl font-bold mb-1;
       background: -webkit-linear-gradient(var(--text-800) 0%, var(--text) 75%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       letter-spacing: -0.02em;
     }
     h2 {
-      @apply text-2xl mb-4 font-medium text-center leading-tight;
+      @apply text-xl sm:text-2xl mb-1 font-medium text-center leading-tight;
       color: var(--text-700);
       text-align: center;
       text-wrap: balance;
