@@ -57,14 +57,16 @@ const Filters: React.FC<FiltersProps> = ({
           onClick={() => handleFilterClick(filterOptions[0].value)}
         />
         <div className="filter-separator"></div>
-        {filterOptions.slice(1).map((filter) => (
-          <FilterButton
-            key={filter.value}
-            label={filter.label}
-            isActive={selectedFilters.includes(filter.value)}
-            onClick={() => handleFilterClick(filter.value)}
-          />
-        ))}
+        <div className="filter-button-group-specific">
+          {filterOptions.slice(1).map((filter) => (
+            <FilterButton
+              key={filter.value}
+              label={filter.label}
+              isActive={selectedFilters.includes(filter.value)}
+              onClick={() => handleFilterClick(filter.value)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

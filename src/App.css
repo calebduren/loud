@@ -185,6 +185,7 @@ body {
   @apply flex flex-col gap-1 items-center;
 
   .filter-button {
+    @apply flex-grow-0 flex justify-center items-center self-center;
     padding: 0.25rem 1rem;
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -214,7 +215,11 @@ body {
   }
 
   .filter-button-group {
-    @apply flex flex-row gap-2 flex-wrap justify-center;
+    @apply flex flex-row gap-2 sm:flex-wrap justify-center;
+
+    .filter-button-group-specific {
+      @apply flex flex-row gap-2 flex-wrap justify-start;
+    }
   }
 
   .filter-label {
