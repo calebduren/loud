@@ -47,26 +47,24 @@ const Filters: React.FC<FiltersProps> = ({
   };
 
   return (
-    <div className="filter-section">
-      <div className="filter-group">
-        <label className="filter-label">Filter by release length</label>
-        <div className="filter-button-group">
+    <div className="filter-group">
+      <label className="filter-label">Filter by release length</label>
+      <div className="filter-button-group">
+        <FilterButton
+          key={filterOptions[0].value}
+          label={filterOptions[0].label}
+          isActive={selectedFilters.includes(filterOptions[0].value)}
+          onClick={() => handleFilterClick(filterOptions[0].value)}
+        />
+        <div className="filter-separator"></div>
+        {filterOptions.slice(1).map((filter) => (
           <FilterButton
-            key={filterOptions[0].value}
-            label={filterOptions[0].label}
-            isActive={selectedFilters.includes(filterOptions[0].value)}
-            onClick={() => handleFilterClick(filterOptions[0].value)}
+            key={filter.value}
+            label={filter.label}
+            isActive={selectedFilters.includes(filter.value)}
+            onClick={() => handleFilterClick(filter.value)}
           />
-          <div className="filter-separator"></div>
-          {filterOptions.slice(1).map((filter) => (
-            <FilterButton
-              key={filter.value}
-              label={filter.label}
-              isActive={selectedFilters.includes(filter.value)}
-              onClick={() => handleFilterClick(filter.value)}
-            />
-          ))}
-        </div>
+        ))}
       </div>
     </div>
   );

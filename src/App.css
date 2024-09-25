@@ -194,65 +194,45 @@ body {
   border: 1px solid var(--border-color-strong);
 }
 
-.filter-section {
-  display: flex;
-  gap: 1rem;
-  @apply flex flex-col gap-2 mb-8 items-center;
-}
-
 .filter-group {
   @apply flex flex-col gap-1 items-center;
-}
 
-.filter-button-group {
-  @apply flex flex-row gap-2 flex-wrap;
-}
+  .filter-button {
+    padding: 0.25rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    background-color: var(--body-background);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+  }
+  .filter-separator {
+    width: 1px;
+    border-radius: 1px;
+    margin: 0 4px;
+    background-color: var(--border-color-strong);
+  }
 
-.filter-button {
-  padding: 0.25rem 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  font-size: 0.875rem;
-  background-color: var(--body-background);
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.2s ease-in-out;
-}
+  .filter-button:hover {
+    background-color: var(--background-color);
+    border-color: var(--border-color-strong);
+  }
 
-.filter-separator {
-  width: 1px;
-  border-radius: 1px;
-  margin: 0 0.25rem;
-  background-color: var(--border-color-strong);
-}
+  .filter-button.active {
+    background-color: var(--primary-color);
+    color: white;
+    border: 1px solid var(--primary-color);
+  }
 
-.filter-button:hover {
-  background-color: var(--background-color);
-  border-color: var(--border-color-strong);
-}
+  .filter-button-group {
+    @apply flex flex-row gap-2 flex-wrap justify-center;
+  }
 
-.filter-button.active {
-  background-color: var(--primary-color);
-  color: white;
-  border: 1px solid var(--primary-color);
-}
-
-.filter-button-group {
-  @apply flex flex-row gap-2 flex-wrap justify-center;
-}
-
-.filter-label {
-  @apply text-sm font-medium mb-2;
-  color: var(--text-500);
-}
-
-select {
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 0.875rem;
-  background-color: white;
-  min-width: 150px;
+  .filter-label {
+    @apply text-sm font-medium mb-2;
+    color: var(--text-500);
+  }
 }
 
 .release-meta-item {
@@ -317,132 +297,132 @@ select {
         0 32px 32px hsl(0deg 0% 0% / 0.16), 0 48px 48px hsl(0deg 0% 0% / 0.16);
     }
   }
-}
 
-.release-card-top {
-  position: relative;
-}
-
-.release-info-container {
-  @apply flex flex-col gap-3;
-}
-
-.release-info {
-  padding: calc(1rem + 4px);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  @apply absolute flex flex-col justify-between h-full w-full;
-}
-
-.release-card-bottom {
-  @apply text-sm;
-  padding: 0 3px 3px 3px;
-  background-color: hsl(0, 0%, 10%);
-  transition: background-color 0.2s ease-in-out;
-  .label {
-    @apply mr-0.5 w-[60px];
-    color: var(--text-500);
+  .gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: linear-gradient(
+      to bottom,
+      hsla(0, 0%, 10%, 0) 0%,
+      hsla(0, 0%, 10%, 0.013) 8.1%,
+      hsla(0, 0%, 10%, 0.049) 15.5%,
+      hsla(0, 0%, 10%, 0.104) 22.5%,
+      hsla(0, 0%, 10%, 0.175) 29%,
+      hsla(0, 0%, 10%, 0.259) 35.3%,
+      hsla(0, 0%, 10%, 0.352) 41.2%,
+      hsla(0, 0%, 10%, 0.45) 47.1%,
+      hsla(0, 0%, 10%, 0.55) 52.9%,
+      hsla(0, 0%, 10%, 0.648) 58.8%,
+      hsla(0, 0%, 10%, 0.741) 64.7%,
+      hsla(0, 0%, 10%, 0.825) 71%,
+      hsla(0, 0%, 10%, 0.896) 77.5%,
+      hsla(0, 0%, 10%, 0.951) 84.5%,
+      hsla(0, 0%, 10%, 0.987) 91.9%,
+      hsl(0, 0%, 10%) 100%
+    );
   }
-  .release-card-bottom-content {
-    @apply flex flex-col gap-3 rounded;
-    background: var(--background-color);
-    border: 1px solid var(--border-color-weak);
-    border-radius: 2px 2px 7px 7px;
-    padding: 1rem;
+
+  .tag-container {
+    @apply flex flex-row justify-between;
+  }
+
+  .tag {
+    color: #333;
+    @apply rounded font-medium px-1.5 py-0.5 text-xs flex justify-center items-center;
+  }
+
+  .tag-type {
+    background-color: #e4e4e4;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .open-in-spotify {
+    opacity: 0;
+    @apply bg-green-500 text-white;
+  }
+
+  .release-card:hover .open-in-spotify {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  }
+
+  .artist-name,
+  .album-name {
+    @apply font-medium text-white text-xl leading-5 m-0;
+    text-shadow: 0 0 4px 1px rgba(0, 0, 0, 1);
+  }
+
+  .album-name {
+    @apply italic;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .album-description,
+  .similar-artists {
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 0.25rem;
+  }
+
+  .release-card-top {
+    position: relative;
+  }
+
+  .release-info-container {
+    @apply flex flex-col gap-3;
+  }
+
+  .release-info {
+    padding: calc(1rem + 4px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    @apply absolute flex flex-col justify-between h-full w-full;
+  }
+
+  .release-card-bottom {
+    @apply text-sm;
+    padding: 0 3px 3px 3px;
+    background-color: hsl(0, 0%, 10%);
     transition: background-color 0.2s ease-in-out;
+    .label {
+      @apply mr-0.5 w-[60px];
+      color: var(--text-500);
+    }
+    .release-card-bottom-content {
+      @apply flex flex-col gap-3 rounded;
+      background: var(--background-color);
+      border: 1px solid var(--border-color-weak);
+      border-radius: 2px 2px 7px 7px;
+      padding: 1rem;
+      transition: background-color 0.2s ease-in-out;
+    }
   }
-}
 
-.touch-only {
-  display: none;
-  @media (pointer: coarse) {
-    display: block;
+  .touch-only {
+    display: none;
+    @media (pointer: coarse) {
+      display: block;
+    }
   }
-}
 
-.faux-link {
-  @apply text-sm font-semibold;
-  color: var(--primary-color);
-}
-
-.gradient-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0px;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  background: linear-gradient(
-    to bottom,
-    hsla(0, 0%, 10%, 0) 0%,
-    hsla(0, 0%, 10%, 0.013) 8.1%,
-    hsla(0, 0%, 10%, 0.049) 15.5%,
-    hsla(0, 0%, 10%, 0.104) 22.5%,
-    hsla(0, 0%, 10%, 0.175) 29%,
-    hsla(0, 0%, 10%, 0.259) 35.3%,
-    hsla(0, 0%, 10%, 0.352) 41.2%,
-    hsla(0, 0%, 10%, 0.45) 47.1%,
-    hsla(0, 0%, 10%, 0.55) 52.9%,
-    hsla(0, 0%, 10%, 0.648) 58.8%,
-    hsla(0, 0%, 10%, 0.741) 64.7%,
-    hsla(0, 0%, 10%, 0.825) 71%,
-    hsla(0, 0%, 10%, 0.896) 77.5%,
-    hsla(0, 0%, 10%, 0.951) 84.5%,
-    hsla(0, 0%, 10%, 0.987) 91.9%,
-    hsl(0, 0%, 10%) 100%
-  );
-}
-
-.tag-container {
-  @apply flex flex-row justify-between;
-}
-
-.tag {
-  color: #333;
-  @apply rounded font-medium px-1.5 py-0.5 text-xs flex justify-center items-center;
-}
-
-.tag-type {
-  background-color: #e4e4e4;
-  color: #333;
-  background-color: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-.open-in-spotify {
-  opacity: 0;
-  @apply bg-green-500 text-white;
-}
-
-.release-card:hover .open-in-spotify {
-  opacity: 1;
-  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-}
-
-.artist-name,
-.album-name {
-  @apply font-medium text-white text-xl leading-5 m-0;
-  text-shadow: 0 0 4px 1px rgba(0, 0, 0, 1);
-}
-
-.album-name {
-  @apply italic;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.album-description,
-.similar-artists {
-  font-size: 0.75rem;
-  color: #666;
-  margin-bottom: 0.25rem;
+  .faux-link {
+    @apply text-sm font-semibold;
+    color: var(--primary-color);
+  }
 }
