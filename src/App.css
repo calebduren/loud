@@ -73,7 +73,7 @@
   --text-700: hsl(0, 0%, 30%);
   --text-800: hsl(0, 0%, 20%);
   --text: hsl(0, 0%, 5%);
-  --body-background: hsl(0, 0%, 94%);
+  --body-background: hsl(0, 0%, 96%);
   --background-color: hsl(0, 0%, 99%);
   --background-color-hover: hsl(0, 0%, 97%);
   --dark-theme-background: hsl(0, 0%, 4%);
@@ -185,7 +185,7 @@ body {
   @apply flex flex-col gap-1 items-center;
 
   .filter-button {
-    @apply flex-grow-0 flex justify-center items-center self-center;
+    @apply flex-grow-0 flex justify-center items-center self-start;
     padding: 0.25rem 1rem;
     border: 1px solid var(--border-color);
     border-radius: 8px;
