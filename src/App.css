@@ -67,9 +67,10 @@
 }
 
 :root {
-  --primary-color: hsl(12 80% 64%);
-  --primary-color-dark: hsl(12 80% 60%);
+  --primary-color: hsl(12, 81%, 68%);
+  --primary-color-dark: hsl(12, 80%, 60%);
   --text-500: hsl(0, 0%, 50%);
+  --text-600: hsl(0, 0%, 40%);
   --text-700: hsl(0, 0%, 30%);
   --text-800: hsl(0, 0%, 20%);
   --text: hsl(0, 0%, 5%);
@@ -84,11 +85,11 @@
 
   @media (prefers-color-scheme: dark) {
     --body-background: hsl(0, 0%, 8%);
-    /* --background-color: hsl(0, 0%, 10%); */
     --background-color: hsl(0, 0%, 17%);
     --background-color-hover: hsl(0, 0%, 22%);
     --text: var(--dark-theme-text);
     --text-500: hsl(0, 0%, 60%);
+    --text-600: hsl(0, 0%, 65%);
     --text-700: hsl(0, 0%, 70%);
     --text-800: hsl(0, 0%, 90%);
     --border-color: hsla(0, 0%, 80%, 0.2);
@@ -135,14 +136,14 @@ body {
   @apply flex items-center w-20 h-20 justify-center mb-4 sm:mb-8;
   background: linear-gradient(to bottom, hsl(0 0% 97% / 1), hsl(0 0% 90% / 1));
   border-radius: 16px;
-  box-shadow: inset -1px -1px 0px 0 rgba(0, 0, 0, 0.03),
+  box-shadow: inset -1px -1px 0 0 rgba(0, 0, 0, 0.03),
     inset 1px 1px 1px 0 rgba(255, 255, 255, 0.6),
     0 1px 1px hsl(0deg 0% 0% / 0.024), 0 2px 2px hsl(0deg 0% 0% / 0.024),
     0 8px 8px hsl(0deg 0% 0% / 0.024), 0 20px 20px hsl(0deg 0% 0% / 0.024),
     0 32px 32px hsl(0deg 0% 0% / 0.024);
   @media (prefers-color-scheme: dark) {
     background: linear-gradient(to top, hsl(0 0% 9% / 1), hsl(0 0% 18% / 1));
-    box-shadow: inset -1px -1px 0px 0 rgba(0, 0, 0, 0.03),
+    box-shadow: inset -1px -1px 0 0 rgba(0, 0, 0, 0.03),
       inset 1px 1px 1px 0 rgba(255, 255, 255, 0.05),
       0 1px 1px hsl(0deg 0% 0% / 0.15), 0 2px 2px hsl(0deg 0% 0% / 0.15),
       0 8px 8px hsl(0deg 0% 0% / 0.15), 0 20px 20px hsl(0deg 0% 0% / 0.15);
@@ -200,7 +201,7 @@ body {
     border-radius: 1px;
     flex-grow: 0;
     margin: 0 4px;
-    background-color: var(--border-color-strong);
+    background-color: var(--border-color);
   }
 
   .filter-button:hover {
@@ -230,6 +231,10 @@ body {
 
 .release-meta-item {
   @apply flex flex-row gap-4;
+  color: var(--text);
+  @media (prefers-color-scheme: dark) {
+    color: var(--text-600);
+  }
 }
 
 .release-date-header {
@@ -268,8 +273,12 @@ body {
       0 2px 2px hsl(0deg 0% 0% / 0.024), 0 8px 8px hsl(0deg 0% 0% / 0.024),
       0 32px 32px hsl(0deg 0% 0% / 0.024), 0 48px 48px hsl(0deg 0% 0% / 0.024);
 
-    .release-card-bottom-content {
-      background-color: var(--background-color-hover);
+    .release-card-bottom .release-card-bottom-content {
+      background: hsl(0, 0%, 98%);
+
+      @media (prefers-color-scheme: dark) {
+        background: hsl(0, 0%, 24%);
+      }
     }
     .open-in-spotify {
       opacity: 1;
@@ -334,6 +343,10 @@ body {
       hsla(0, 0%, 10%, 0.987) 91.9%,
       hsl(0, 0%, 10%) 100%
     );
+
+    @media (prefers-color-scheme: dark) {
+      box-shadow: inset 0 1.5px 0 1.5px rgba(255, 255, 255, 0.05);
+    }
   }
 
   .tag-container {
@@ -372,19 +385,12 @@ body {
     text-overflow: ellipsis;
   }
 
-  .album-description,
-  .similar-artists {
-    font-size: 0.75rem;
-    color: #666;
-    margin-bottom: 0.25rem;
-  }
-
   .release-info-container {
     @apply flex flex-col gap-3;
   }
 
   .release-info {
-    padding: calc(1rem + 4px);
+    padding: calc(1rem + 8px);
     position: absolute;
     top: 0;
     left: 0;
@@ -398,23 +404,36 @@ body {
     z-index: 3;
     position: relative;
     @apply text-sm;
-    padding: 0 4.5px 4.5px 4.5px;
+    padding: 0 6.5px 6.5px 6.5px;
     border-radius: 0 0 12px 12px;
     border: 1.5px solid rgba(255, 255, 255, 0.25);
     border-top: none;
     background-color: hsl(0, 0%, 10%);
     transition: background-color 0.2s ease-in-out;
+
+    @media (prefers-color-scheme: dark) {
+      border: 1.5px solid rgba(255, 255, 255, 0.05);
+      border-top: none;
+    }
+
     .label {
       @apply mr-0.5 w-[60px];
       color: var(--text-500);
     }
     .release-card-bottom-content {
       @apply flex flex-col gap-3 rounded;
-      background: var(--background-color);
-      border: 1px solid var(--border-color-weak);
-      border-radius: 2px 2px 9px 9px;
+      background: hsl(0, 0%, 94%);
+      box-shadow: inset 1px 1px 1px 0 rgba(255, 255, 255, 0.9),
+        inset -1px -1px 1px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 3px 3px 8px 8px;
       padding: 1rem;
       transition: background-color 0.2s ease-in-out;
+
+      @media (prefers-color-scheme: dark) {
+        background: hsl(0, 0%, 18%);
+        box-shadow: inset 1.5px 1.5px 1.5px 0 rgba(255, 255, 255, 0.05),
+          inset -1.5px -1.5px 1.5px 0 rgba(0, 0, 0, 0.5);
+      }
     }
   }
 
