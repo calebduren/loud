@@ -1,5 +1,5 @@
 import React from "react";
-
+import ArrowUpAndRight from "../assets/icons/ArrowUpAndRight";
 interface Release {
   id: string;
   name: string;
@@ -28,7 +28,9 @@ const ReleaseCard: React.FC<{ release: Release }> = ({ release }) => (
               ? "EP"
               : release.type.charAt(0).toUpperCase() + release.type.slice(1)}
           </span>
-          <div className="open-in-spotify tag">Open in Spotify ↗</div>
+          <div className="open-in-spotify tag">
+            Open in Spotify <ArrowUpAndRight fill="#fff" />
+          </div>
         </div>
         <div className="release-info-container">
           <h3 className="artist-name">{release.artist}</h3>
@@ -49,7 +51,9 @@ const ReleaseCard: React.FC<{ release: Release }> = ({ release }) => (
         <div className="total-tracks release-meta-item">
           <div className="label">Tracks</div> {release.totalTracks}
         </div>
-        <div className="touch-only faux-link">Open in Spotify ↗</div>
+        <div className="touch-only faux-link">
+          Open in Spotify <ArrowUpAndRight fill="var(--primary-color)" />
+        </div>
       </div>
     </div>
   </a>

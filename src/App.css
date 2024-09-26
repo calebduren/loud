@@ -367,7 +367,8 @@ body {
   }
   .open-in-spotify {
     opacity: 0;
-    @apply bg-green-500 text-white;
+    background-color: var(--primary-color);
+    @apply text-white flex flex-row items-center gap-1;
   }
 
   .artist-name,
@@ -438,9 +439,11 @@ body {
   }
 
   .touch-only {
+    @apply flex flex-row items-center gap-1;
     display: none;
+
     @media (pointer: coarse) {
-      display: block;
+      display: flex;
     }
   }
 
