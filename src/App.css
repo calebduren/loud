@@ -206,7 +206,20 @@ body {
 
   .filter-button:hover {
     background-color: var(--background-color);
-    border-color: var(--border-color-strong);
+    border-color: transparent;
+    box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.024),
+      0 2px 2px hsl(0deg 0% 0% / 0.024), 0 8px 8px hsl(0deg 0% 0% / 0.024),
+      0 20px 20px hsl(0deg 0% 0% / 0.024);
+  }
+
+  .filter-button:active {
+    border-color: var(--border-color);
+    background-color: linear-gradient(
+      to bottom,
+      var(--body-background),
+      var(--background-color)
+    );
+    box-shadow: inset 1px 1px 1px 2px rgba(0, 0, 0, 0.03);
   }
 
   .filter-button.active {
