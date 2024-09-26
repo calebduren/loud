@@ -19,13 +19,7 @@ const ReleaseCard: React.FC<{ release: Release }> = ({ release }) => (
     title="Open in Spotify"
   >
     <div className="release-card-top">
-      <img
-        className="release-image"
-        src={release.image}
-        alt="Release cover"
-        width="100%"
-        height="100%"
-      />
+      <img className="release-image" src={release.image} alt="Release cover" />
       <div className="gradient-overlay"></div>
       <div className="release-info">
         <div className="tag-container">
